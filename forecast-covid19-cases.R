@@ -11,11 +11,13 @@ library(readr)
 # Data
 tsc <- covid19.data(case = "ts-confirmed")
 View(covid19.data(case = "ts-confirmed"))
-tsc <- tsc %>% filter(Country.Region == 'US')
+tsc <- tsc %>% filter(Country.Region == 'US') # Use onlu US country data
 tsc <- data.frame(t(tsc))
 tsc <<- cbind(row.names(tsc), data.frame(tsc,row.names = NULL))
-colnames(tsc) <- c('Date','Confirmed')
-tsc <- tsc[-c(1:4),]
+colnames(tsc) <- c('Date','Confirmed') # Rename columns
+tsc <- tsc[-c(1:4),] # Remove first 4 columns
+
+# Chanage the Data type of the selected colummns
 tsc$Date <- ymd(tsc$Date)
 tsc$Confirmed <- as.numeric(tsc$Confirmed)
 
